@@ -1,4 +1,4 @@
-# phplabs
+# skills
 
 Requirements:
 -------------
@@ -9,15 +9,6 @@ virtualbox 5.x
 It might be issue with vagrant guest access, so in any case install the following plugin:
 ```
 vagrant plugin install vagrant-vbguest
-```
-
-Get Started:
-------------
-
-Make clone of the cuttent repository:
-```
-git clone https://github.com/mortalfc/phplabs.git
-cd phplabs
 ```
 
 Run vagrant:
