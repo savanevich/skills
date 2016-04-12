@@ -1,0 +1,44 @@
+<data-breadcrumbs></data-breadcrumbs>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h4>Technologies ({{ total }})</h4>
+	</div>
+	<data-loading-indicator></data-loading-indicator>
+	<div class="table-skills" data-ng-if="isNotEmpty()">
+		<table class="table table-hover table-responsive">
+			<thead>
+				<tr>
+					<th class="col-xs-1">#</th>
+					<th class="col-xs-6"
+						data-sorting
+						data-field="'name'"
+						data-by="field"
+						data-reverse="reverse"
+						data-total="total"
+						data-limit="limit"
+					>
+							Name
+					</th>
+					<th class="col-xs-5"
+						data-sorting
+						data-field="'category.name'"
+						data-by="field"
+						data-reverse="reverse"
+						data-total="total"
+						data-limit="limit"
+					>
+							Category
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-ng-repeat ="technology in technologies | orderBy:field:reverse">
+					<td>{{ ($index+1)+(page-1)*limit }}</td>
+					<td>{{ technology.name }}</td>
+					<td>{{ technology.category.name }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<data-app-pagination limit="limit" total="total" page="page"></data-app-pagination>

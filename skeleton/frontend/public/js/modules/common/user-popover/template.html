@@ -1,0 +1,10 @@
+<a  data-ui-sref="users.profile({userId: user.user_id})"
+	data-popover-template="'/js/modules/common/user-popover/popover.html'" 
+	data-popover-placement="right"
+	data-popover-popup-delay="800"
+	data-popover-title="{{ user.first_name }} {{ user.second_name }}" 
+	data-popover-trigger="mouseenter"
+	data-ng-mouseenter="loadSkills(user.user_id)">
+	<img data-ng-src="{{ link + user.image }}" alt="avatar" class="img-rounded users-list-img" />
+	{{ user.username }}
+</a>

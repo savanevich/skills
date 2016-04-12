@@ -1,0 +1,23 @@
+<div class="row">
+	<div class="col-md-5">
+		<img src='{{ link + user.image }}' class="img-thumbnail img-responsive" />
+	</div>
+	<div class="col-md-7">
+		<table  class="table table-condensed">
+			<thead>
+				<tr>
+					<th class="col-md-1">#</th>
+					<th class="col-md-5">Technology</th>
+					<th class="col-md-7">Skill</th>
+				<tr>
+			</thead>
+			<tbody>
+				<tr data-ng-repeat="skill in userSkills">
+					<td>{{ $index+1 }}</td>
+					<td>{{ skill.name }}</td>
+					<td>{{ skill.pivot.level | levelFormat }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

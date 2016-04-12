@@ -1,0 +1,73 @@
+<div class="row">
+    <br>
+    <div class="text-center">
+        <form name="searchForm" class="form-inline center-block  main-search" novalidate>
+          <autocomplete items="users" prompt="Username" property="username" model="username" ></autocomplete >
+          <autocomplete items="technologies" prompt="Technology" property="name" model="technology"></autocomplete >
+          <div class="form-group">
+              <select class="form-control" data-ng-model="category">
+                <option selected="selected" value="">Any category</option>
+                <option data-ng-repeat="category in categories" value="{{ category.id }}">{{ category.name }}</option>
+              </select>
+          </div>
+          <div class="form-group">
+            	<select class="form-control" data-ng-model="level">
+            	  <option selected="selected" value="">Any level</option>   
+            	  <option data-ng-repeat=" level in levels" value="{{ level.number }}">{{ level.number }} {{ level.name }}</option>
+            	</select >
+          </div>
+          <div class="form-group">
+        	   <button type="submit" data-ng-click="deny = true" class="btn btn-success" data-ui-sref=".result-table({ username: username, technology: technology, level: level, category: category })">Search</button>
+          </div>
+          <div class="alert alert-warning" role="alert" data-ng-show="!searchForm.$valid&&searchForm.$submitted">Warning! Fill in all inputs.</div>
+        </form> 
+    </div>
+    <br>
+    <div data-ng-show="$state.current.name === 'search'">
+        <h2 class="text-center">How it works</h2>
+        <br>
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <h3 class="gotham text-center">1. Wishes to study</h3>
+                    <div class="text-center">
+                        <i class="fa fa-child fa-5x"></i>
+                    </div>
+                    <hr>
+                    <div class="caption text-center">
+                        If you want to study new technologies and you can't find needful information or don't sure where to start -
+                        <strong>you're in the right place</strong>.
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <h3 class="gotham text-center">2. Search for mentors</h3>
+                    <div class="text-center">
+                        <i class="fa fa-user-secret fa-5x"></i>
+                    </div>
+                    <hr>
+                    <div class="caption text-center">
+                        Here you can <strong>find people</strong>, who'll share their knowledge and experience about interested technologies.
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <h3 class="gotham text-center">3. Connect with people</h3>
+                    <div class="text-center">
+                        <i class="fa fa-users fa-5x"></i>
+                    </div>
+                    <hr>
+                    <div class="caption text-center">
+                        Study interested technologies, connect with people, make friends and <strong>share yourself knowledge</strong>.
+                    </div>
+                </div>
+            </div>
+        </div>
+    <br>
+    <br>
+    <br>
+    </div>
+
+    <div data-ui-view></div>

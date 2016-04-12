@@ -1,0 +1,31 @@
+<nav class="text-center" data-ng-show="total > limit">
+    <div data-ng-if="total > limit">
+        <ul class="pagination">
+            <li data-ng-if="page != 1">
+                <a data-ui-sref=" .({page: {{ page - 1 }} })" aria-label="Previous">
+                    <span aria-hidden="true"><i class="fa fa-angle-double-left"></i></span>
+                </a>
+            </li>
+            <li class="disabled" data-ng-if="page == 1">
+                <span aria-hidden="true">
+                    <i class="fa fa-angle-double-left"></i>
+                </span>
+            </li>
+            <li data-ng-repeat="section in sections track by $index" data-ng-class="{'active' : section == page}">
+                <a data-ng-if="section == page">{{ section }}</a>
+                <span data-ng-if="(section != page) && (section == '...')">{{ section }}</span>
+                <a data-ng-if="(section != page) && (section != '...')" data-ui-sref=" .({page: {{ section }}, limit: {{ limit }} })">{{ section }}</a>
+            </li>
+            <li data-ng-if="page != totalSections">
+                <a data-ui-sref=" .({page:  1+{{ page }}, limit: {{ limit }} })" aria-label="Next">
+                    <span aria-hidden="true"><i class="fa fa-angle-double-right"></i></span>
+                </a>
+            </li>
+            <li class="disabled" data-ng-if="page == totalSections">
+                <span aria-hidden="true">
+                    <i class="fa fa-angle-double-right"></i>
+                </span>
+            </li>
+        </ul>
+    </div>
+</nav>

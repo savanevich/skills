@@ -1,0 +1,68 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">New skill</h3>
+  </div>
+  <div class="panel-body">
+	<form class="form-horizontal" name="addSkillForm" novalidate>
+	  <div class="form-group">
+	    <label for="skillName" class="col-sm-2 control-label">Technology</label>
+	    <div class="col-sm-10">
+	      <input type="text"
+				 class="form-control"
+				 id="skillName"
+				 name="skillName"
+				 data-ng-model="newSkill.name"
+				 placeholder="Type name of technology"
+				 required
+				 autofocus>
+	    </div>
+	  </div>
+		<div class="row" data-ng-show="addSkillForm.skillName.$error.required && addSkillForm.$submitted">
+			<div class="col-sm-offset-2 col-sm-10">
+				<data-notification
+						data-notification-type="danger"
+						data-message="Technology's name is required">
+				</data-notification>
+			</div>
+		</div>
+	  <div class="form-group">
+	    <label for="category" class="col-sm-2 control-label">Category</label>
+	    <div class="col-sm-10">
+			<select class="form-control" name="category" id="category" data-ng-model="newSkill.category_id" required>
+			  <option data-ng-repeat="category in categories" value="{{ category.id }}">{{ category.name }}</option>
+			</select>
+	  	</div>
+	  </div>
+		<div class="row" data-ng-show="addSkillForm.category.$error.required && (addSkillForm.category.$touched || addSkillForm.$submitted)">
+			  <div class="col-sm-offset-2 col-sm-10">
+				  <data-notification
+						  data-notification-type="danger"
+						  data-message="Category is required">
+				  </data-notification>
+			  </div>
+		</div>
+	  <div class="form-group">
+	    <label for="level" class="col-sm-2 control-label">Skill</label>
+	    <div class="col-sm-10">
+			<select class="form-control" id="level" name="level" data-ng-model="newSkill.level" required>
+				<option data-ng-repeat="level in levels" value="{{ level.number }}">{{ level.number }} {{ level.name }}</option>
+			</select>
+		</div>
+	  </div>
+		<div class="row" data-ng-show="addSkillForm.level.$error.required && (addSkillForm.level.$touched || addSkillForm.$submitted)">
+			<div class="col-sm-offset-2 col-sm-10">
+				<data-notification
+						data-notification-type="danger"
+						data-message="Level is required">
+				</data-notification>
+			</div>
+		</div>
+	  <div class="form-group">
+	    <div class="col-sm-offset-2 col-sm-10">
+	      <button type="submit" class="btn btn-default" data-ng-click="addSkill()">Add</button>
+	      <button type="button" class="btn btn-default" data-ui-sref="settings.skills">Back</button>
+	    </div>
+	  </div>
+	</form>
+  </div>
+</div>

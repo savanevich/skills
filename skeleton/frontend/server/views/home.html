@@ -1,0 +1,16 @@
+{% extends "layouts/main.html" %}
+
+{% block content %}
+<data-app-navbar></data-app-navbar>
+	<div class="container content">
+	    <ui-view></ui-view>	
+	</div>
+<data-app-footer></data-app-footer>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        window.embeddedData = {{ embeddedData | stringify | safe }};
+    </script>
+{% endblock %}
+

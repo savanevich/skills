@@ -1,0 +1,60 @@
+<data-breadcrumbs></data-breadcrumbs>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+	<h4>Users ({{ total }})</h4>
+	</div>
+	<data-loading-indicator></data-loading-indicator>
+	<div class="table-skills"  data-ng-if="isNotEmpty()">
+		<table class="table table-hover table-responsive">
+			<thead>
+				<tr>
+					<th class="col-xs-1">ID</th>
+					<th class="col-xs-3"
+						data-sorting
+						data-field="'username'"
+						data-by="field"
+						data-reverse="reverse"
+						data-total="total"
+						data-limit="limit"
+					>
+						Username
+					</th>
+					<th class="col-xs-4"
+						data-sorting
+						data-field="'email'"
+						data-by="field"
+						data-reverse="reverse"
+						data-total="total"
+						data-limit="limit"
+					>
+						Email
+					</th>
+					<th class="col-xs-2"
+						data-sorting
+						data-field="'created_at'"
+						data-by="field"
+						data-reverse="reverse"
+						data-total="total"
+						data-limit="limit"
+					>
+						Joined on
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-ng-repeat = "user in users | orderBy:field:reverse">
+					<td>{{ ($index+1)+(page-1)*limit }}</td>
+					<td>
+						<a data-ui-sref=".profile({userId: user.id})" data-ui-sref-opts="{ inherit: false }">
+							<img data-ng-src="{{ link + user.image }}" alt="avatar" class="img-rounded users-list-img" />
+							{{ user.username }}
+						</a>
+					</td>
+					<td>{{ user.email }}</td>
+					<td>{{ user.created_at }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<data-app-pagination limit="limit" total="total" page="page"></data-app-pagination>

@@ -1,0 +1,11 @@
+<ol class="breadcrumb">
+    <li><a href="#/">Home</a></li>
+	<li data-ng-repeat="link in path">
+		<a data-ui-sref="{{ link.state }}" data-ng-if="!$last">
+			{{ link.name }}
+		</a>
+	 <span data-ng-if="$last">
+			{{ link.name }}
+	</span>
+	</li>
+</ol>

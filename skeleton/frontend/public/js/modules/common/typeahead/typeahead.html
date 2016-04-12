@@ -1,0 +1,6 @@
+<div class="form-group">
+    <input type="text" class="form-control" data-ng-model="model" data-ng-keydown="selected=false" placeholder="{{prompt}}"/>
+    <ul class="list-group dropdown-list" data-ng-hide="!model.length || selected">
+   		<li class="list-group-item" data-ng-repeat="item in items | filter: itemFilter" data-ng-click="selectItem(item[property])">{{ item[property] }}</li>
+    </ul>
+</div>

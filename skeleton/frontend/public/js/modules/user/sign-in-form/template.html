@@ -1,0 +1,116 @@
+<div class="row">
+	<div class="col-md-3">
+	</div>
+
+	<div class="col-md-6">
+		<br>
+		<br>
+		<br>
+		<div class="panel panel-primary">
+			<div class="panel-heading text-center">
+		    	<h3 class="panel-title">Sign In</h3>
+			</div>
+
+			<div class="panel-body">
+			  	<form name="signInForm" data-ng-model="user" data-ng-submit="onSubmit()" novalidate>
+					<div class="form-group">
+	                    <label for="email">Email</label> <span>*</span>
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+							<input type="email"
+									class="form-control"
+									name="email"
+									id="email"
+									data-ng-model="user.email"
+									placeholder="Type email"
+									required>
+						</div>
+	                </div>
+
+	               	<div data-ng-show="signInForm.email.$touched  || signInForm.$submitted">
+	               		
+						<data-notification 
+							data-ng-show="signInForm.email.$error.required"	
+							data-notification-type="danger" 
+							data-message="Email required">
+						</data-notification>
+
+						<data-notification
+							data-ng-show="signInForm.email.$error.email"	
+							data-notification-type="danger" 
+							data-message="This is not a valid email">
+						</data-notification>
+
+					</div>
+
+					<div class="form-group">
+	                    <label for="password">Password</label> <span>*</span>
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+							<input type="password"
+									class="form-control"
+									name="password"
+									id="password"
+									data-ng-model="user.password"
+									data-data-data-ng-minlength="6"
+									data-data-ng-maxlength="20"
+									data-ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/"
+									placeholder="Type password"
+									required>
+	                	</div>
+					</div>
+
+	               	<div data-ng-show="signInForm.password.$touched || signInForm.$submitted">
+
+						<data-notification
+							data-ng-show="signInForm.password.$error.required"	
+							data-notification-type="danger" 
+							data-message="Password required">
+						</data-notification>
+
+						<data-notification 
+							data-ng-show="!signInForm.password.$error.required && (signInForm.password.$error.minlength || signInForm.password.$error.maxlength)"	
+							data-notification-type="danger" 
+							data-message="Password must be between 6 and 20 characters">
+						</data-notification>
+
+						<data-notification 
+							data-ng-show="!signInForm.password.$error.required && !signInForm.password.$error.minlength && !signInForm.password.$error.maxlength && signInForm.password.$error.pattern"	
+							data-notification-type="danger" 
+							data-message="Must contain one lower &amp; uppercase letter, and one non-alpha character (a number or a symbol)">
+						</data-notification>
+
+					</div>
+
+					<data-notification
+							data-ng-show="errorLogin"
+							data-notification-type="danger"
+							data-message="{{errorLogin}}">
+					</data-notification>
+
+					<div class="form-group">
+		                <input type="checkbox"
+		                       	name="remember_me"
+		                       	id="remember_me"
+		                       	data-ng-model="user.remember_me">
+		                <label for="remember_me">Remember me</label>
+	                </div>
+
+	                <div class="form-group">
+						Don't have an account? <a data-ui-sref="sign-up-form"><b>Sign up</b></a>
+					</div>
+
+	                <button type="submit" class="btn btn-primary">
+	                	Sign In
+	                </button>
+			  	</form>
+			</div>
+		</div>
+		<br>
+		<br>
+		<br>
+	</div>
+
+	<div class="col-md-3">
+	</div>
+</div>

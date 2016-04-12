@@ -1,0 +1,99 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Profile picture</h3>
+    </div>
+    <div class="panel-body">
+        <div class="col-xs-4">
+            <img data-ng-src="{{ link }}" alt="avatar" class="img-rounded img-responsive profile-img" width=60% />
+            <br>
+            <button class="btn btn-success" data-ng-click="uploadAvatarImage()">
+                Upload new picture
+            </button>
+        </div>
+        <div class="col-xs-8">
+            <h4>Choose new avatar:</h4>
+            <form id="upload" enctype="multipart/form-data" method="POST"  name="uploadForm">
+                <div class="form-group">
+                    <!-- <input type="hidden" name="MAX_FILE_SIZE" value="30000" /> -->
+                    <input name="userfile" type="file" />
+                </div>
+            </form>
+            <data-notification
+                    data-ng-show="showMsgAfterSuccessfullyUpdatingAvatar"
+                    data-notification-type="success"
+                    data-message="Your picture was successfully updated.">
+            </data-notification>
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Profile information</h3>
+    </div>
+    <div class="panel-body">
+        <form name="updateInfoForm" data-ng-submit="updateProfile()" novalidate>
+            <div class="form-group row">
+                <div class="col-md-8">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" data-ng-model="currentUser.email" required>
+                </div>
+            </div>
+            <div data-ng-show="updateInfoForm.email.$touched || updateInfoForm.$submitted" class="col-xs-8">
+                <data-notification
+                        data-ng-show="updateInfoForm.email.$error.required"
+                        data-notification-type="danger"
+                        data-message="Email required">
+                </data-notification>
+
+                <data-notification
+                        data-ng-show="updateInfoForm.email.$error.email"
+                        data-notification-type="danger"
+                        data-message="This is not a valid email">
+                </data-notification>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-8">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" data-ng-model="currentUser.username" required>
+                </div>
+            </div>
+            <data-notification
+                    data-ng-show="updateInfoForm.username.$error.required && (updateInfoForm.username.$touched || updateInfoForm.$submitted)"
+                    data-notification-type="danger"
+                    data-message="Username required"
+                    class="col-xs-8">
+            </data-notification>
+            <div class="form-group row">
+                <div class="col-md-8">
+                    <label for="first_name">First name</label>
+                    <input type="text" class="form-control" id="first_name" data-ng-model="currentUser.first_name">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-8">
+                    <label for="second_name">Second name</label>
+                    <input type="text" class="form-control" id="second_name" data-ng-model="currentUser.second_name">
+                </div>
+            </div>
+            <div class="form-group row" data-ng-show="showMsgAfterSuccessfullyUpdatingInformation">
+                <div class="col-xs-8">
+                    <data-notification
+                        data-notification-type="success"
+                        data-message="You information was successfully updated.">
+                    </data-notification>
+                </div>
+            </div>
+            <div class="form-group row" data-ng-show="updatingInfoError">
+                <div class="col-xs-12">
+                    <data-notification
+                            data-notification-type="danger"
+                            data-message="{{updatingInfoError}}"
+                            class="col-xs-8"
+                            >
+                    </data-notification>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Update profile</button>
+        </form>
+    </div>
+</div>

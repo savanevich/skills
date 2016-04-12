@@ -1,0 +1,132 @@
+<data-breadcrumbs></data-breadcrumbs>
+<div class="row">
+	<div class="col-md-3">
+		<p><img data-ng-src="{{ link }}" alt="avatar" class="img-rounded img-responsive profile-img"/>
+		<p class="text-center" data-ng-show="allowEditProfile">
+			<a data-ui-sref="settings.information" data-ui-sref-opts="{ inherit: false }">Upload new avatar</a>
+		</p>
+		</p>
+
+		<h3> {{ user.username }} </h3>
+		<hr>
+		<p> <i class="fa fa-envelope-o"></i> {{ user.email }}</a> </p>
+		<p> <i class="fa fa-clock-o"></i> Joined on {{ user.created_at }} </p>
+		<hr>
+	</div>
+	<div class="col-md-8  col-md-offset-1">
+		<div >
+
+		</div>
+		<div class="panel panel-default" data-ng-show="user.first_name && user.second_name">
+			<div class="panel-heading">
+				<div class="panel-title">
+					<div class="text-left">Profile
+						<a	data-ng-show="allowEditProfile"
+							data-ui-sref="settings.information"
+							data-ui-sref-opts="{ inherit: false }">
+							 <i class="fa fa-pencil"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		  <div class="panel-body">
+		    <p data-ng-show="user.first_name"><b>First name:</b> {{ user.first_name }}</p>
+			<p data-ng-show="user.second_name"><b>Last name:</b> {{ user.second_name }}</p>
+		  </div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="panel-title">
+						<p>Skills</p>
+				</div>
+			</div>
+			<data-loading-indicator></data-loading-indicator>
+			<div class="table-skills" data-ng-if="isHaveSkills()">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">#</th>
+							<th class="col-lg-2 col-md-2 col-sm-2 col-xs-2"
+								data-sorting
+								data-field="'name'"
+								data-by="field"
+								data-reverse="reverse"
+								data-total="null"
+								data-limit="null"
+							>
+								Technology
+							</th>
+							<th class="col-lg-2 col-md-2 col-sm-2 col-xs-2"
+								data-sorting
+								data-field="'category.name'"
+								data-by="field"
+								data-reverse="reverse"
+								data-total="null"
+								data-limit="null"
+							>
+								Category
+							</th>
+							<th class="col-lg-4 col-md-4 col-sm-4 col-xs-4"
+								data-sorting
+								data-field="'pivot.level'"
+								data-by="field"
+								data-reverse="reverse"
+								data-total="null"
+								data-limit="null"
+							>
+								Skill
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr data-ng-repeat="skill in parentobj.skills | orderBy:field:reverse">
+							<td>{{ $index+1 }}</td>
+							<td data-ng-if="skill.id !== editedSkill">
+								{{ skill.name }}
+							</td>
+							<td data-ng-if="skill.id === editedSkill">
+								<div class="form-group">
+									<input type="text" class="form-control" data-ng-model="skill.name"/>
+								</div>
+							</td>
+							<td data-ng-if="skill.id !== editedSkill">
+								{{ skill.category.name }}
+							</td>
+							<td data-ng-if="skill.id === editedSkill">
+								<div class="form-group">
+									<select class="form-control"
+											data-ng-model="skill.category"
+											data-ng-options="category.name for category in categories track by category.name">
+									</select>
+								</div>
+							</td>
+							<td data-ng-if="skill.id !== editedSkill">
+								<div class="row">
+									<div class="col-sm-11">
+										<div class="progress">
+											<div ng-class="{'progress-bar progress-bar-warning': skill.pivot.level < 3,
+															'progress-bar progress-bar-info': skill.pivot.level >= 3 && skill.pivot.level < 7,
+															'progress-bar progress-bar-success': skill.pivot.level >= 7}"
+												 class="progress-bar"
+												 role="progressbar"
+												 aria-valuenow="{{ skill.pivot.level*10 }}"
+												 aria-valuemin="0"
+												 aria-valuemax="100"
+												 style="width: {{ skill.pivot.level*10 }}%;">
+													{{ skill.pivot.level*10 }}%
+											  </div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div data-ng-if="showMsgIfNoSkills()">
+				<br>
+				<p class="lead text-center">This user doesn't have any skills.</p>
+			</div>
+		</div>
+	</div>
+</div>

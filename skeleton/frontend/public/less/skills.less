@@ -1,0 +1,112 @@
+@import "../bower_components/bootstrap/less/bootstrap";
+@import "../bower_components/font-awesome/css/font-awesome.min.css";
+
+@import "/dist/alertify/alertify.css";
+
+//variables
+@import "./colors-variables";
+@import "./fonts-variables";
+
+body {
+  font-family: @font-family-serif;
+  color: @main-text-color;
+  height: @font-size-base;
+}
+
+
+//Override Bootstrap's default container.
+@media (min-width: 1200px) {
+  .container {
+    width: 1080px;
+  }
+}
+
+.content {
+	padding-top: 70px;
+}
+
+.main-search {
+	width: 67%;
+
+	.form-group {
+		height:40px;
+
+	.dropdown-list {
+
+		.list-group-item:hover{
+			background-color: @dropdown-list-hover-bg-color;
+			border-color: @dropdown-list-hover-border;
+		}
+	}
+
+	}
+
+	button{
+		vertical-align: top;
+	}
+}
+
+.table-skills {
+	padding: 10px 10px 0px 10px; 
+}
+
+.logo {
+	padding-top: 0px;
+}
+
+.main-footer {
+	border-top: 1px solid @footer-border-color;
+	margin-top: 20px;
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.company-title-in-footer {
+	color:  @footer-company-title-color;
+	padding-right: 5%;
+}
+
+.footer-menu {
+    margin: 0; 
+    padding: 4px; 
+
+    .menu-item {
+		display: inline; 
+		margin-right: 5px; 
+		padding: 3px; 
+		
+		a {
+			color: @footer-links-color;
+		}
+	}
+}
+
+.logo-container {
+	text-align: center;
+	width: 100%;
+	padding-top: 30vh;
+	padding-bottom: 10%;
+}
+
+.profile-img {
+	width: 100%;
+}
+
+.users-list-img {
+	width: 20px;
+	height: 20px;
+}
+
+.left-float {
+	float: left;
+}
+
+.popover-content {
+	max-width: 450px;
+}
+
+.loading-spinner {
+	padding-bottom: 4%;
+	padding-top: 4%;
+	text-align: center;
+}

@@ -1,0 +1,168 @@
+<div class="row">
+	<div class="col-md-3">
+	</div>
+	
+	<div class="col-md-6">
+		<br>
+		<br>
+		<div class="panel panel-primary">
+			<div class="panel-heading text-center">
+		    	<h3 class="panel-title">Sign Up Form</h3>
+			</div>
+
+			<div class="panel-body">
+			  	<form name="signUpForm" data-ng-model="user" data-ng-submit="onSubmit()" novalidate>
+			  		<div class="form-group">
+	                    <label for="username">Username</label> <span>*</span>
+	                    <input type="text"
+	                        	class="form-control"
+	                        	name="username"
+	                        	id="username"
+	                        	data-ng-model="user.username"
+	                        	data-ng-minlength="2" 
+	                        	data-ng-maxlength="20" 
+	                        	placeholder="Username"
+	                        	required>
+	                </div>
+
+					<data-notification
+						data-ng-show="signUpForm.username.$error.required && (signUpForm.username.$touched || signUpForm.$submitted)"
+						data-notification-type="danger" 
+						data-message="Username required">
+					</data-notification>
+
+					<div class="form-group">
+	                    <label for="first_name">First name</label>
+	                    <input type="text"
+	                        	class="form-control"
+	                        	name="first_name"
+	                        	id="first_name"
+	                        	data-ng-model="user.first_name"
+	                        	placeholder="First name">
+	                </div>
+
+					<div class="form-group">
+	                    <label for="second_name">Second name</label>
+	                    <input type="text"
+	                        	class="form-control"
+	                        	name="second_name"
+	                        	id="second_name"
+	                        	data-ng-model="user.second_name"
+	                        	placeholder="Second name">
+	                </div>
+
+
+					<div class="form-group">
+	                    <label for="email">Email</label> <span>*</span>
+	                    <input type="email"
+	                        	class="form-control"
+	                        	name="email"
+	                        	id="email"
+	                        	data-ng-model="user.email"
+	                        	placeholder="Email"
+	                        	required>
+	                </div>
+
+	               	<div data-ng-show="signUpForm.email.$touched || signUpForm.$submitted">
+
+						<data-notification
+							data-ng-show="signUpForm.email.$error.required"	
+							data-notification-type="danger" 
+							data-message="Email required">
+						</data-notification>
+
+						<data-notification
+							data-ng-show="signUpForm.email.$error.email"	
+							data-notification-type="danger" 
+							data-message="This is not a valid email">
+						</data-notification>
+
+					</div>
+
+					<div class="form-group">
+	                    <label for="password">Password</label> <span>*</span>
+	                    <input type="password"
+	                        	class="form-control"
+	                        	name="password"
+	                        	id="password"
+	                        	data-ng-model="user.password"
+	                        	data-ng-minlength="6" 
+	                        	data-ng-maxlength="20" 
+	                        	data-ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/"
+	                        	placeholder="Password"
+	                        	required>
+	                </div>
+
+	               	<div data-ng-show="signUpForm.password.$touched || signUpForm.$submitted">
+
+						<data-notification
+							data-ng-show="signUpForm.password.$error.required"	
+							data-notification-type="danger" 
+							data-message="Password required">
+						</data-notification>
+
+						<data-notification 
+							data-ng-show="!signUpForm.password.$error.required && (signUpForm.password.$error.minlength || signUpForm.password.$error.maxlength)"	
+							data-notification-type="danger" 
+							data-message="Password must be between 6 and 20 characters">
+						</data-notification>
+
+						<data-notification
+							data-ng-show="!signUpForm.password.$error.required && !signUpForm.password.$error.minlength && !signUpForm.password.$error.maxlength && signUpForm.password.$error.pattern"	
+							data-notification-type="danger" 
+							data-message="Must contain one lower &amp; uppercase letter, and one non-alpha character (a number or a symbol)">
+						</data-notification>
+
+					</div>
+
+					<div class="form-group">
+	                    <label for="confirm_password">Confirm password</label> <span>*</span>
+	                    <input type="password"
+	                        	class="form-control"
+	                        	name="confirm_password"
+	                        	id="confirm_password"
+	                        	data-ng-model="user.confirm_password"
+	                        	data-match-password="password"
+	                        	placeholder="Confirm password"
+	                        	required>
+	                </div>
+
+	                <div data-ng-show="signUpForm.confirm_password.$touched || signUpForm.$submitted">
+
+						<data-notification 
+							data-ng-show="signUpForm.confirm_password.$error.required"	
+							data-notification-type="danger" 
+							data-message="Confirm password required">
+						</data-notification>
+
+						<data-notification 
+							data-ng-show="!signUpForm.confirm_password.$error.required && signUpForm.confirm_password.$error.passwordMatch"	
+							data-notification-type="danger" 
+							data-message="Your passwords did not match">
+						</data-notification>
+
+					</div>
+					<data-notification
+							data-ng-show="showSuccessMsg"
+							data-notification-type="success"
+							data-message="You were successfully registered in the system. Now you can sign in.">
+					</data-notification>
+
+					<data-notification
+							data-ng-show="registerError"
+							data-notification-type="danger"
+							data-message="{{registerError}}">
+					</data-notification>
+	                <button type="submit" class="btn btn-primary">
+	                	Sign Up
+	                </button>
+			  	</form>
+			</div>
+		</div>
+		<br>
+		<br>
+	</div>
+
+	<div class="col-md-3">
+	</div>
+</div>

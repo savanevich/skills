@@ -1,0 +1,6 @@
+<a data-ng-click="sort()">
+    <span data-ng-transclude></span>
+    <i data-ng-class="{ 'fa fa-sort-amount-asc' : ((field == sortingColumn && total > limit) || field == by) && (order == 'asc' || reverse == true),
+                        'fa fa-sort-amount-desc' : ((field == sortingColumn && total > limit) || field == by) && (order == 'desc' || reverse == false)}">
+    </i>
+</a>

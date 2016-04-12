@@ -1,0 +1,121 @@
+{% extends "layouts/main.html" %}
+
+{% block content %}
+    
+	<div class="container">
+		<div class="page-header">
+			<h1>Add/Edit Entity Page</h1>      
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-12">
+				<form role="form">
+				
+					<div class="form-group">
+						<label for="usr">Username:</label>
+						<input type="text" class="form-control">
+					</div>
+					
+					<div class="form-group">
+						<label for="usr">First name:</label>
+						<input type="text" class="form-control">
+					</div>
+					
+					<div class="form-group">
+						<label for="usr">Second name:</label>
+						<input type="text" class="form-control">
+					</div>
+					
+					<div class="form-group">
+						<label for="email">Email address:</label>
+						<input type="email" class="form-control">
+					</div>
+					
+					<div class="form-group">
+						<label for="pwd">Password:</label>
+						<input type="password" class="form-control">
+					</div>
+					
+					<div class="form-group">
+						<label for="pwd">Confirm password:</label>
+						<input type="password" class="form-control">
+					</div>
+					
+					<div class="form-group">
+						<label for="sel1">Select example:</label>
+							<select class="form-control" id="sel1">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+						</select>
+						<br />
+						<label for="sel2">Mutiple select list (hold shift to select more than one):</label>
+							<select multiple class="form-control" id="sel2">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+							</select>
+					</div>
+					
+					<div class="form-group">
+						<label for="comment">Comment:</label>
+						<textarea class="form-control" rows="5" placeholder="Enter Comment here"></textarea>
+					</div>
+					
+					<div class="checkbox">
+					  <label><input type="checkbox" value="">Option 1</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" value="">Option 2</label>
+					</div>
+					<div class="checkbox disabled">
+					  <label><input type="checkbox" value="" disabled>Option 3</label>
+					</div>
+					
+					<div class="radio">
+					  <label><input type="radio" name="optradio">Option 1</label>
+					</div>
+					<div class="radio">
+					  <label><input type="radio" name="optradio">Option 2</label>
+					</div>
+					<div class="radio disabled">
+					  <label><input type="radio" name="optradio" disabled>Option 3</label>
+					</div>
+					
+					<div class="alert alert-danger">
+						<strong>Error!</strong> Error message example.
+					</div>
+					
+					<button type="submit" class="btn btn-info">Submit</button>
+				</form>
+			</div>
+		</div>
+		<br /><br />
+		<div class="row">
+			<div class="col-sm-2 col-xs-6">
+				<input type="button" class="btn btn-info" value="Save">
+				<input type="submit" class="btn btn-info" value="Submit">
+			</div>
+			<div class="col-sm-5">
+				<button type="button" class="btn btn-default btn-sm">Default</button>
+				<button type="button" class="btn btn-primary btn-sm">Primary</button>
+				<button type="button" class="btn btn-success btn-xs">Success</button>			
+			</div>
+			<div class="col-sm-5">
+				<button type="button" class="btn btn-warning">Warning</button>
+				<button type="button" class="btn btn-danger">Danger</button>
+				<button type="button" class="btn btn-link">Link</button>	
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        window.embeddedData = {{ embeddedData | stringify | safe }};
+    </script>
+{% endblock %}
+
