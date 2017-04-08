@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 echo "Provisioning virtual machine..."
 sudo apt-get -y update
 echo "Installing vim"

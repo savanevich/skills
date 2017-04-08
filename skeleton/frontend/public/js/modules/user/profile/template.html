@@ -1,19 +1,32 @@
 <data-breadcrumbs></data-breadcrumbs>
 <div class="row">
 	<div class="col-md-3">
-		<p><img data-ng-src="{{ link }}" alt="avatar" class="img-rounded img-responsive profile-img"/>
-		<p class="text-center" data-ng-show="allowEditProfile">
-			<a data-ui-sref="settings.information" data-ui-sref-opts="{ inherit: false }">Upload new avatar</a>
+		<p>
+			<img data-ng-src="{{ link }}" alt="avatar" class="img-rounded img-responsive profile-img"/>
+			<p class="text-center" data-ng-show="allowEditProfile">
+				<a data-ui-sref="settings.information" data-ui-sref-opts="{ inherit: false }">
+					Upload new avatar
+				</a>
+			</p>
 		</p>
-		</p>
-
-		<h3> {{ user.username }} </h3>
+		<h3>{{ user.username }}</h3>
+		<hr>
+		<div class="row profile-stats">
+			<div class="col-md-6 text-center followers-block">
+				<p class="counter">{{ user.followers_count || 0 }}</p>
+				<p>Followers</p>
+			</div>
+			<div class="col-md-6 text-center following-block">
+				<p class="counter">{{ user.following_count || 0 }}</p>
+				<p>Following</p>
+			</div>
+		</div>
 		<hr>
 		<p> <i class="fa fa-envelope-o"></i> {{ user.email }}</a> </p>
 		<p> <i class="fa fa-clock-o"></i> Joined on {{ user.created_at }} </p>
 		<hr>
 	</div>
-	<div class="col-md-8  col-md-offset-1">
+	<div class="col-md-8 col-md-offset-1">
 		<div >
 
 		</div>

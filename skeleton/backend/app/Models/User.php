@@ -48,7 +48,7 @@ class User extends Model implements AuthenticatableContract,
      */
     public function technologies()
     {
-        return $this->belongsToMany('App\Models\Technology', 'user_technology')->withPivot('id', 'level');;
+        return $this->belongsToMany('App\Models\Technology', 'user_technology')->withPivot('id', 'level');
     }
 
     /**
@@ -72,10 +72,14 @@ class User extends Model implements AuthenticatableContract,
      */
     public static function getUserById($id)
     {
-        $query = "SELECT * FROM users WHERE id = :id";
+        $query = "SELECT `u`.*, COUNT(DISTINCT `uf`.id) AS followers_count, COUNT(DISTINCT `uf1`.id) AS following_count
+                  FROM users AS `u`
+                  LEFT JOIN user_follower AS `uf` ON `u`.id = `uf`.user_id
+                  LEFT JOIN user_follower AS `uf1` ON `u`.id = `uf1`.follower_id
+                  WHERE `u`.id = :id";
         $result = DB::select($query, ['id' => $id]);
 
-        return $result;
+        return $result[0];
     }
 
     /**

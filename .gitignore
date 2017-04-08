@@ -2,3 +2,4 @@
 .idea/
 .vagrant/
 skeleton/backend/public/packages/
+skeleton/backend/public/users_avatars/

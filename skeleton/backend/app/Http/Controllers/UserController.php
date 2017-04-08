@@ -54,7 +54,7 @@ class UserController extends Controller
     {
         $userId = User::createUser($request);
 
-        if($userId) {
+        if ($userId) {
             $user = User::getUserById($userId);
             
             return $this->toJsonResponse(201, $user, false);
@@ -73,10 +73,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
+        $user = User::getUserById($id);
 
-        if($user) {
-            return $this->toJsonResponse(200, $user, false); 
+        if ($user) {
+            return $this->toJsonResponse(200, $user, false);
         } else {
             $error = 'User with id = ' . $id . ' wasn\'t found';
 
