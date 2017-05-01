@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\User;
+use App\Models\UserFollower;
 use App\Models\Technology;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserSkillRequest;
@@ -279,7 +280,7 @@ class UserController extends Controller
     /**
      * Get path of user image.
      *
-     * @param  int  $id
+     * @param  int  $userId
      * @return \Illuminate\Http\Response
      */
     public function getAvatarLink($userId)
@@ -305,7 +306,7 @@ class UserController extends Controller
      * Save the new user image and delete the rpevious .
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $userId
      * @return \Illuminate\Http\Response
      */
     public function saveAvatar(Request $request, $userId)
@@ -327,5 +328,63 @@ class UserController extends Controller
         }
 
         return $this->toJsonResponse(200, 'users_avatars/' . $newImageName, false);
+    }
+
+    /**
+     * Add follower to the user
+     *
+     * @param Request $request
+     * @return json
+     */
+    public function followUser(Request $request)
+    {
+        $user = Auth::User();
+        $userId = $user->id;
+
+        $rules = [
+            'followingId' => 'required|exists:users,id'
+        ];
+
+        $this->validate($request, $rules);
+
+        $userFollower = new UserFollower;
+
+        $userFollower->user_id = $request->followingId;
+        $userFollower->follower_id = $userId;
+
+        $userFollower->save();
+
+        $result = array(
+            'user_id' => $userFollower->user_id,
+            'follower_id' => $userFollower->follower_id,
+        );
+
+        return $this->toJsonResponse(200, $result, false);
+    }
+
+    /**
+     * Unfollow user
+     *
+     * @param Request $request
+     * @return json
+     */
+    public function unFollowUser(Request $request)
+    {
+        $user = Auth::User();
+        $userId = $user->id;
+
+        $rules = [
+            'followingId' => 'required|exists:users,id'
+        ];
+
+        $this->validate($request, $rules);
+
+        $deletedRows = UserFollower::where(
+            array(
+                'follower_id' => $userId,
+                'user_id' => $request->followingId
+            ))->delete();
+
+        return $this->toJsonResponse(200, $deletedRows, false);
     }
 }

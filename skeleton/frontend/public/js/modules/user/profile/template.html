@@ -10,6 +10,18 @@
 			</p>
 		</p>
 		<h3>{{ user.username }}</h3>
+		<div data-ng-if="!allowEditProfile && isAuthenticated() && user.id != currentUser.id">
+			<hr>
+			<div class="row profile-actions">
+				<button type="button" class="btn btn-primary btn-block">Write a message</button>
+				<button type="button" class="btn btn-primary btn-block" data-ng-click="followUser()" data-ng-if="user.followers.indexOf(currentUser.id) === -1">
+					Follow
+				</button>
+				<button type="button" class="btn btn-danger btn-block" data-ng-click="unFollowUser()" data-ng-if="user.followers.indexOf(currentUser.id) !== -1">
+					Unfollow
+				</button>
+			</div>
+		</div>
 		<hr>
 		<div class="row profile-stats">
 			<div class="col-md-6 text-center followers-block">

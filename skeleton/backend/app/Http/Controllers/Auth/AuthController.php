@@ -99,7 +99,7 @@ class AuthController extends Controller
     {
         try {
             if (!$user = $this->jwtauth->parseToken()->authenticate()) {
-                $error = 'User wasn\'t find';
+                $error = 'User wasn\'t found';
 
                 return $this->toJsonResponse(404, false, $error);
             }
@@ -108,6 +108,11 @@ class AuthController extends Controller
 
             return $this->toJsonResponse(500, false, $error);
         }
+        $userData = User::getUserFollowers($user['id']);
+        $user['followers'] = $userData->followers;
+        $user['followers_count'] = $userData->followers_count;
+        $user['following_count'] = $userData->following_count;
+
         $data = compact('user');
 
         return $this->toJsonResponse(200, $data, false);

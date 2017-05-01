@@ -38,6 +38,8 @@ Route::group(['prefix' => 'api/v1/'], function () {
             Route::post('/{userId}/skills', 'UserController@addSkill');
             Route::put('/{userId}/skills/{technologyId}', 'UserController@updateSkill');
             Route::delete('/{userId}/skills/{technologyId}', 'UserController@deleteSkill');
+            Route::post('/{userId}/follower', 'UserController@followUser');
+            Route::delete('/{userId}/follower', 'UserController@unFollowUser');
         });
     });
 

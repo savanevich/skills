@@ -77,9 +77,53 @@ class User extends Model implements AuthenticatableContract,
                   LEFT JOIN user_follower AS `uf` ON `u`.id = `uf`.user_id
                   LEFT JOIN user_follower AS `uf1` ON `u`.id = `uf1`.follower_id
                   WHERE `u`.id = :id";
-        $result = DB::select($query, ['id' => $id]);
+        $user = DB::select($query, ['id' => $id]);
 
-        return $result[0];
+        $query = "SELECT `uf`.follower_id
+                  FROM user_follower AS `uf`
+                  WHERE `uf`.user_id = :id";
+
+        $userFollowers = DB::select($query, ['id' => $id]);
+
+        $result = $user[0];
+        $result->followers = array();
+
+        foreach ($userFollowers as $follower) {
+            array_push($result->followers, $follower->follower_id);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get followers and stats
+     *
+     * @param $id
+     * @return mixed
+     */
+    public static function getUserFollowers($id)
+    {
+        $query = "SELECT COUNT(DISTINCT `uf`.id) AS followers_count, COUNT(DISTINCT `uf1`.id) AS following_count
+                  FROM users AS `u`
+                  LEFT JOIN user_follower AS `uf` ON `u`.id = `uf`.user_id
+                  LEFT JOIN user_follower AS `uf1` ON `u`.id = `uf1`.follower_id
+                  WHERE `u`.id = :id";
+        $user = DB::select($query, ['id' => $id]);
+
+        $query = "SELECT `uf`.follower_id
+                  FROM user_follower AS `uf`
+                  WHERE `uf`.user_id = :id";
+
+        $userFollowers = DB::select($query, ['id' => $id]);
+
+        $result = $user[0];
+        $result->followers = array();
+
+        foreach ($userFollowers as $follower) {
+            array_push($result->followers, $follower->follower_id);
+        }
+
+        return $result;
     }
 
     /**
