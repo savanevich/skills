@@ -13,7 +13,9 @@
 		<div data-ng-if="!allowEditProfile && isAuthenticated() && user.id != currentUser.id">
 			<hr>
 			<div class="row profile-actions">
-				<button type="button" class="btn btn-primary btn-block">Write a message</button>
+				<button type="button" data-ui-sref=".messages()" class="btn btn-primary btn-block">
+					Write a message
+				</button>
 				<button type="button" class="btn btn-primary btn-block" data-ng-click="followUser()" data-ng-if="user.followers.indexOf(currentUser.id) === -1">
 					Follow
 				</button>

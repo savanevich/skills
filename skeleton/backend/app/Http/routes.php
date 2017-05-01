@@ -40,6 +40,9 @@ Route::group(['prefix' => 'api/v1/'], function () {
             Route::delete('/{userId}/skills/{technologyId}', 'UserController@deleteSkill');
             Route::post('/{userId}/follower', 'UserController@followUser');
             Route::delete('/{userId}/follower', 'UserController@unFollowUser');
+            Route::get('/{userId}/messages', 'MessageController@index');
+            Route::post('/{userId}/messages', 'MessageController@store');
+            Route::get('/{userId}/messages/{lastMessageId}', 'MessageController@getUpdates');
         });
     });
 

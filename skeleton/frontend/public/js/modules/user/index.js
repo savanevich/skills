@@ -10,6 +10,7 @@ angular
     .run(require('./auth-run'))
     .controller('UserController', require('./users-list/controller'))
     .controller('ProfileController', require('./profile/controller'))
+    .controller('ChatController', require('./chat/controller'))
     .controller('SignUpFormController', require('./sign-up-form/controller'))
     .controller('SignInFormController', require('./sign-in-form/controller'))
     .service('UserService', require('./user-service'))

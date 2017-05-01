@@ -112,5 +112,22 @@ module.exports = ['itaRequestService', function (itaRequestService) {
                   headers: {'Content-Type': undefined}
                 });
         };
+
+        this.getMessages = function(userId) {
+
+            return itaRequestService.request({
+                url: '/api/v1/users/' + userId + '/messages/',
+                method: 'GET'
+            });
+        };
+
+        this.sendMessage = function(userId, message) {
+
+            return itaRequestService.request({
+                url: '/api/v1/users/' + userId + '/messages/',
+                method: 'POST',
+                data: message
+            });
+        };
     }
 ];

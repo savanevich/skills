@@ -45,6 +45,16 @@ module.exports = ['$stateProvider', function ($stateProvider) {
                         template: require('./profile/template.html')
                     }
                 }
+            })
+            .state('users.profile.messages', {
+                url: '/messages',
+                views: {
+                    // rule for absolutely targetting the unnamed view in root unnamed state.
+                    "@": {
+                        controller: 'ChatController',
+                        template: require('./chat/template.html')
+                    }
+                }
             });
     }
 ];
