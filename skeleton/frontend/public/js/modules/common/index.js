@@ -14,4 +14,5 @@ angular
     .directive('loadingIndicator', require('./loading-spinner/loading-spinner-directive'))
     .directive('autocomplete', require('./typeahead/typeahead-directive'))
     .service('LevelService', require('./../search/level-service'))
+    .factory('SocketFactory', require('./socket/factory'))
     .filter('levelFormat', require('./skill-format/skill-format-filter'));

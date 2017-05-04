@@ -6,21 +6,32 @@ module.exports = [
     '$sce',
     '$location',
     '$stateParams',
+    '$anchorScroll',
     'UserService',
     'AuthService',
+    'SocketFactory',
     function (
         $scope,
         $rootScope,
         $sce,
         $location,
         $stateParams,
+        $anchorScroll,
         UserService,
-        AuthService
+        AuthService,
+        SocketFactory
         )
     {
         var userId = parseInt($stateParams.userId, 10);
         $scope.messages = [];
         $scope.link = embeddedData.api.url + '/';
+
+        SocketFactory.on('message', function(data) {
+            $scope.$apply(function () {
+                var message = JSON.parse(data);
+                $scope.messages.push(message);
+            });
+        });
 
         $scope.sendMessage = function () {
             var message = {
@@ -29,20 +40,24 @@ module.exports = [
 
             UserService.sendMessage(userId, message)
                 .then(function (response) {
-                    $scope.messages.push(response.data);
                     $scope.messageBody = '';
-                    $location.hash('message-block');
-                    $anchorScroll();
+                    scrollDown()
             })
         };
 
         loadMessages();
+
+        function scrollDown() {
+            $location.hash('bottom');
+            $anchorScroll();
+        }
 
         function loadMessages() {
             UserService.getMessages(userId)
                 .then(function (response) {
                     if (response.error == false) {
                         $scope.messages = response.data;
+                        scrollDown();
                     } else {
                         console.log(response.error);
                     }

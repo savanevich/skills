@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth;
+use LRedis;
 
 class MessageController extends Controller
 {
@@ -43,6 +44,8 @@ class MessageController extends Controller
         if (isset($message->id)) {
 
             $message = Message::getMessage($message->id);
+            $redis = LRedis::connection();
+            $redis->publish('message', json_encode($message));
 
             return $this->toJsonResponse(201, $message, false);
         } else {
