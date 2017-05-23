@@ -3,6 +3,7 @@
 var domready = require('domready');
 var angular = require('angular');
 var _ = require('lodash');
+var moment = require('moment');
 
 //require common modules
 require('./common/ita-embedded-data');

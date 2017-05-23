@@ -72,9 +72,14 @@ class Message extends Model
         $query = "SELECT `m`.id AS id, `m`.body, `m`.sender_id, `m`.recipient_id, `m`.created_at, `u`.username, `u`.image
                   FROM messages AS `m`
                   INNER JOIN users AS `u` ON `m`.sender_id = `u`.id
-                  WHERE `m`.sender_id = :senderID AND `m`.recipient_id = :recipientID";
+                  WHERE `m`.sender_id IN (?, ?) AND `m`.recipient_id IN (?, ?) ORDER BY `m`.created_at";
 
-        $result = DB::select($query, ['senderID' => $senderID, 'recipientID' => $recipientID]);
+        $result = DB::select($query, [
+            $senderID,
+            $recipientID,
+            $senderID,
+            $recipientID
+        ]);
 
         return $result;
     }

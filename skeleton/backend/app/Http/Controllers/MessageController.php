@@ -43,9 +43,16 @@ class MessageController extends Controller
 
         if (isset($message->id)) {
 
+            if ($message->sender_id > $message->recipient_id) {
+                $chatId = $message->sender_id . '_' . $message->recipient_id;
+            } else {
+                $chatId = $message->recipient_id . '_' . $message->sender_id;
+            }
+
             $message = Message::getMessage($message->id);
+            $message->chat_id = $chatId;
             $redis = LRedis::connection();
-            $redis->publish('message', json_encode($message));
+            $redis->publish('message-channel', json_encode($message));
 
             return $this->toJsonResponse(201, $message, false);
         } else {
@@ -53,10 +60,5 @@ class MessageController extends Controller
 
             return $this->toJsonResponse(404, false, $error);
         }
-    }
-
-    public function getUpdates()
-    {
-
     }
 }

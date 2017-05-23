@@ -23,14 +23,39 @@ module.exports = [
         )
     {
         var userId = parseInt($stateParams.userId, 10);
+        var chatId = null;
         $scope.messages = [];
         $scope.link = embeddedData.api.url + '/';
+        $scope.isTyping = false;
+        $scope.moment = moment;
 
-        SocketFactory.on('message', function(data) {
+        if (userId && $scope.currentUser.id && $scope.currentUser.id > userId) {
+            chatId = $scope.currentUser.id + '_' + userId;
+        } else if (userId && $scope.currentUser.id) {
+            chatId = userId + '_' + $scope.currentUser.id;
+        }
+
+        SocketFactory.emit('join', {
+            chatId: chatId,
+            userName: $scope.currentUser.username
+        });
+
+        SocketFactory.on('message', function (data) {
             $scope.$apply(function () {
-                var message = JSON.parse(data);
-                $scope.messages.push(message);
+                $scope.isTyping = false;
+                $scope.messages.push(data);
+            })
+        });
+
+        SocketFactory.on('isTyping', function (data) {
+            $scope.$apply(function () {
+                console.log(data);
+                if (data.chat == chatId) {
+                    $scope.isTyping = data.isTyping;
+                    $scope.typedUserName = data.person;
+                }
             });
+            $scope.$apply();
         });
 
         $scope.sendMessage = function () {
