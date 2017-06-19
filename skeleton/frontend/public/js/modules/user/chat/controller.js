@@ -44,12 +44,12 @@ module.exports = [
             $scope.$apply(function () {
                 $scope.isTyping = false;
                 $scope.messages.push(data);
+                scrollDown();
             })
         });
 
         SocketFactory.on('isTyping', function (data) {
             $scope.$apply(function () {
-                console.log(data);
                 if (data.chat == chatId) {
                     $scope.isTyping = data.isTyping;
                     $scope.typedUserName = data.person;
